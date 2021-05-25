@@ -1,0 +1,450 @@
+<MainFunction>:
+
+
+
+	canvas.before:
+		Color:
+			rgba: 0,0,0,1
+		Rectangle:
+			pos: root.pos
+			size: root.width, root.height / 10
+			
+			
+			
+			
+			
+	MDToolbar:
+		id: tool_bar
+		top: root.height
+		title: "Covid-19 Tracker Malaysia"
+	
+	MDGridLayout:
+		cols: 2
+		spacing: root.width /2
+		padding: 20
+		size_hint_y: None
+		top: (root.height - tool_bar.height) + (tool_bar.height - 30)
+				
+		MDFlatButton:
+			size_hint: 1,.2
+			
+			text: "[b]Global[/b]"
+			
+			font_size: '20sp'
+			
+			theme_text_color: 'Custom'
+			text_color: (230/255,0,0,1)
+			id: global_button
+			on_release:
+				root.change_statistics(0)
+		
+		MDFlatButton:
+			size_hint: 1,.2
+			text: "Local"
+			id: local_button
+			theme_text_color: 'Custom'
+			text_color: 105/255,105/255,105/255,1
+			on_release:
+				root.change_statistics(1)
+	
+	
+	
+	ScreenManager:
+		id: screen_manager
+	
+		MDScreen:
+			name: 'global_screen'
+			
+			MDGridLayout:
+				cols: 1
+				padding: 30
+				spacing: 20
+				pos_hint: {'top':.8}
+				
+				
+				
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						size_hint_y: None
+						height: self.texture_size[1]
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						text: "Total confirmed cases:"
+						
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 1,204/255,0,1
+						id: global_total
+			
+
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed actives:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 0,102/255,1,1
+						id: global_active
+						
+				
+				
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed recovered:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 0, 230/255,77/255,1
+						id: global_recovered
+		
+				
+				
+				
+				
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed deaths:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 1,0,0,1
+						id: global_deaths
+
+		MDScreen:
+			name: 'local_screen'
+			
+			MDGridLayout:
+				cols: 1
+				padding: 30
+				spacing: 20
+				pos_hint: {'top':.85}
+				
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed cases:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 255/255,204/255,0,1
+						id: total
+
+
+
+
+
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed today: "
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 1,0,1,1
+						id: total_today
+			
+
+
+
+
+
+				MDCard:
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed actives:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 0,102/255,1,1
+						id: active
+						
+				
+				
+				MDCard:
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed recovered:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 0, 230/255,77/255,1
+						id: recovered
+				
+				
+				
+				
+				MDCard:
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Total confirmed deaths:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						
+						theme_text_color: 'Custom'
+						text_color: 1,0,0,1
+						id: deaths
+						
+						
+						
+						
+				
+	
+
+	MDGridLayout:
+		cols: 6
+		pos_hint: {'top':.1}
+		center_x: root.width / 6
+		MDIconButton:
+			id: dashboard_button
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'view-dashboard-outline'
+			id: view-dashboard-outline
+			
+			on_release:
+				root.highlight_button(0)
+		
+		MDIconButton:
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'newspaper-variant-outline'
+			id: newspaper-variant-outline
+			
+			on_release:
+				root.highlight_button(1)
+		
+		MDIconButton:
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'menu'
+			id: menu
+			
+			on_release:
+				root.highlight_button(2)
+		
+		
+		MDIconButton:
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'chart-line'
+			id: chart-line
+			
+			on_release:
+				root.highlight_button(3)
+		
+		
+		MDIconButton:
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'database-outline'
+			id: database-outline
+			
+			on_release:
+				root.highlight_button(4)
+		
+		
+		MDIconButton:
+			theme_text_color: 'Custom'
+			text_color: 1,1,1,1
+			icon: 'information-outline'
+			id: information-outline
+			
+			on_release:
+				root.highlight_button(5)
+		
