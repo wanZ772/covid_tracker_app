@@ -45,13 +45,52 @@
 			theme_text_color: 'Custom'
 			text_color: 105/255,105/255,105/255,1
 			on_release:
-				root.change_statistics(1)
-	
-	
+				root.test()
+				#root.change_statistics(1)
+		
 	
 	ScreenManager:
 		id: screen_manager
 	
+		MDScreen:
+			name: 'details_screen'
+			
+			
+			
+			MDGridLayout:
+				cols: 1
+				
+				MDCard:
+					elevation: 10
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					canvas.before:
+						Color:
+							rgba: 72/255,72/255,72/255,1 
+						Rectangle:		
+							size: self.size
+							pos: self.pos
+					
+					MDLabel:
+						size_hint_y: None
+						height: self.texture_size[1]
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
+						text: "Total confirmed cases:"
+						
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
+						theme_text_color: 'Custom'
+						text_color: 1,204/255,0,1
+						id: total
+			
 		MDScreen:
 			name: 'global_screen'
 			
@@ -407,6 +446,7 @@
 			id: newspaper-variant-outline
 			
 			on_release:
+				screen_manager.current = 'details_screen'
 				root.highlight_button(1)
 		
 		MDIconButton:

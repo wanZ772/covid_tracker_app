@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
+from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests
 from datetime import date
@@ -60,33 +61,35 @@ global_covid_data = ['global_total', 'global_active', 'global_recovered', 'globa
 
 class MainFunction(Screen):
 	def on_touch_move(self, move):
-		if (move.x < move.ox):
-			self.ids.screen_manager.current = 'local_screen'
-			self.ids.screen_manager.transition.direction = 'left'
+		if ((self.ids.screen_manager.current == 'global_screen') or (self.ids.screen_manager.current == 'local_screen')):
+			if (move.x < move.ox):
+				self.ids.screen_manager.current = 'local_screen'
+				self.ids.screen_manager.transition.direction = 'left'
+				
+				self.ids.local_button.text_color = (230/255,0,0,1)
+				self.ids.global_button.text_color = (105/255,105/255,105/255,1)
+				self.ids.local_button.text = "[b]Local[/b]"
+				
+				self.ids.global_button.text = "Global"
+				
+				
+				self.ids.local_button.font_size = '20sp'
+				self.ids.global_button.font_size = '15sp'
+				
+				
+			elif (move.x > move.ox):
+				self.ids.screen_manager.current = 'global_screen'
+				self.ids.screen_manager.transition.direction = 'right'
+				
+				self.ids.global_button.text_color = (230/255,0,0,1)
+				self.ids.local_button.text_color = (105/255,105/255,105/255,1)
+				
+				
+				self.ids.local_button.text = "Local"
+				self.ids.global_button.text = "[b]Global[/b]"
+				self.ids.local_button.font_size = '15sp'
+				self.ids.global_button.font_size = '20sp'
 			
-			self.ids.local_button.text_color = (230/255,0,0,1)
-			self.ids.global_button.text_color = (105/255,105/255,105/255,1)
-			self.ids.local_button.text = "[b]Local[/b]"
-			
-			self.ids.global_button.text = "Global"
-			
-			
-			self.ids.local_button.font_size = '20sp'
-			self.ids.global_button.font_size = '15sp'
-			
-			
-		elif (move.x > move.ox):
-			self.ids.screen_manager.current = 'global_screen'
-			self.ids.screen_manager.transition.direction = 'right'
-			
-			self.ids.global_button.text_color = (230/255,0,0,1)
-			self.ids.local_button.text_color = (105/255,105/255,105/255,1)
-			
-			
-			self.ids.local_button.text = "Local"
-			self.ids.global_button.text = "[b]Global[/b]"
-			self.ids.local_button.font_size = '15sp'
-			self.ids.global_button.font_size = '20sp'
 	
 	def change_statistics(self, get_target):
 		if (get_target == 1):
@@ -118,34 +121,44 @@ class MainFunction(Screen):
 		for i in range(6):
 			self.ids[str(footer_buttons_outline[i])].icon = footer_buttons_outline[i]
 		self.ids[str(footer_buttons_outline[get_button])].icon = footer_buttons[get_button]
+		
+		if (get_button != 0):
+			self.remove_widget(self.ids.global_button)
 	
+	def remove(self, remove_this):
+		print(remove_this)
+		self.remove_widget(remove_this)
+	def test(self):
+		remove_this = (self.ids.global_button)
+		self.remove_widget(remove_this)
 	def __init__(self):
 		super().__init__()
 		self.ids.screen_manager.current = 'global_screen'
 		(self.ids[str(footer_buttons_outline[0])].icon) = footer_buttons[0]
 		
 		
+		self.add_widget(self.ids.global_button)
 		
-		
-		if (str(old_data[0]) != str(date.today())):
-			if (str((old_data[1]) != str(get_total))):
-				try:
-					new_data = [str(date.today()), str(get_total), str(get_total - int(old_data[1]))]
-					with open('old_data.log', 'w') as write_new_data:
-						write_new_data.write(','.join(new_data))
-						write_new_data.close()
-					
-					if (int(old_data[1]) - int(old_data[2]) > 0):
-						with open('old_data.log', 'r') as new_data:
-							today_confirm = new_data.read().split(',')
-							self.ids.total_today.text = today_confirm[2]
-				except:
-					pass
+		# if (str(old_data[0]) != str(date.today())):
+		if (str(old_data[1]) != str(get_total)):
+			new_data = [str(date.today()), str(get_total), str(get_total - int(old_data[1]))]
+			
+			
+			with open('old_data.log', 'w') as write_new_data:
+				write_new_data.write(','.join(new_data))
+				write_new_data.close()
+			with open('old_data.log', 'r') as new:
+				new_total_today = new.read().split(',')
+				new.close()
+				
+			if (get_total != int(new_total_today[2])):
+				self.ids.total_today.text = new_total_today[2]
 		else:
-			if (int(old_data[1]) - int(old_data[2]) > 0):
-				self.ids.total_today.text = "{}".format(old_data[2])
-		
-		
+			if (old_data[1] != old_data[2]):
+				self.ids.total_today.text = old_data[2]
+
+			
+			
 		
 		for fetch_data in range(len(covid_data)):
 			self.ids[str(covid_data[fetch_data])].text = str(data[fetch_data])
