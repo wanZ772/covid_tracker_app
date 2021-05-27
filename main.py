@@ -1,7 +1,8 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
-
+from matplotlib import pyplot
+from random import randrange
 from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests
@@ -141,6 +142,23 @@ class MainFunction(Screen):
 									text = "{}: Null".format(i)
 								)
 						)
+			elif (get_button == 3):
+				total_cases = []
+				week_day = []
+				day = "{}".format(date.today()).split('-')
+				minus_day = 7
+				
+				
+				for i in range(7):
+					week_day.append("{}/{}".format(int(day[2]) - minus_day, day[1]))
+					total_cases.append(randrange(1000, 10000))
+					minus_day -= 1
+				
+				pyplot.plot(week_day,total_cases, linestyle = 'dashed', marker = '*', markerfacecolor = 'blue', color = 'red')
+				pyplot.savefig('week.png')
+				
+				self.ids.chart_for_week.source = 'week.png'
+					
 					
 			
 		else:
