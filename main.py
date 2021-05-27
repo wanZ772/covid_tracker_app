@@ -1,7 +1,7 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
-# from kivymd.uix.label import MDLabel
+
 from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests
