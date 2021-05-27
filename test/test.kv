@@ -1,0 +1,13 @@
+<TestFunction>:
+	GridLayout:
+		cols: 1
+		id: main_layout
+		Button:
+			id: remove_this
+			text: "This text will be removed"
+
+		
+		Button:
+			text: "remove the text"
+			on_release:
+				root.remove_text()

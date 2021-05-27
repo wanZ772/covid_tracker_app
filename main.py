@@ -1,13 +1,17 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
+# from kivymd.uix.label import MDLabel
 from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests
 from datetime import date
 
 
+
 api = requests.get('https://coronacache.home-assistant.io/corona.json').json()['features']
+states = requests.get('https://api.azanpro.com/zone/states.json').json()['states']
+
 
 global_confimed,global_deaths,global_recover,global_active = 0,0,0,0
 for global_data in range(len(api)):
@@ -27,6 +31,10 @@ for i in api:
 		get_deaths = i['attributes']['Deaths']
 		get_recover = i['attributes']['Recovered']
 		get_active = i['attributes']['Active']
+		get_tested = i['attributes']['People_Tested']
+		get_hospitalized = i['attributes']['People_Hospitalized']
+		get_ir = i['attributes']['Incident_Rate']
+		get_mr = i['attributes']['Mortality_Rate']
 
 data = [get_total, get_deaths, get_recover, get_active]
 
@@ -123,21 +131,33 @@ class MainFunction(Screen):
 		self.ids[str(footer_buttons_outline[get_button])].icon = footer_buttons[get_button]
 		
 		if (get_button != 0):
-			self.remove_widget(self.ids.global_button)
-	
-	def remove(self, remove_this):
-		print(remove_this)
-		self.remove_widget(remove_this)
+			self.remove_widget(self.ids.statistic_mode)
+			
+			if (get_button == 2):
+				self.ids.cases_by_states.clear_widgets()
+				for i in states:
+					self.ids.cases_by_states.add_widget(
+							Button(
+									text = "{}: Null".format(i)
+								)
+						)
+					
+			
+		else:
+			self.add_widget(self.ids.statistic_mode)
+			
+
 	def test(self):
-		remove_this = (self.ids.global_button)
-		self.remove_widget(remove_this)
+		pass
 	def __init__(self):
 		super().__init__()
+		
+		
 		self.ids.screen_manager.current = 'global_screen'
 		(self.ids[str(footer_buttons_outline[0])].icon) = footer_buttons[0]
 		
 		
-		self.add_widget(self.ids.global_button)
+		
 		
 		# if (str(old_data[0]) != str(date.today())):
 		if (str(old_data[1]) != str(get_total)):
@@ -151,11 +171,27 @@ class MainFunction(Screen):
 				new_total_today = new.read().split(',')
 				new.close()
 				
+				
 			if (get_total != int(new_total_today[2])):
 				self.ids.total_today.text = new_total_today[2]
+				self.ids.total_today_detail.text = new_total_today[2]
 		else:
 			if (old_data[1] != old_data[2]):
 				self.ids.total_today.text = old_data[2]
+				self.ids.total_today_detail.text = old_data[2]
+		
+		self.ids.last_date.text = old_data[0]
+		
+		self.ids.total_detail.text = old_data[1]
+		self.ids.active_detail.text = str(get_active)
+		self.ids.recovered_detail.text = str(get_recover)
+		self.ids.people_tested.text = str(get_tested)
+		self.ids.people_hospitalized.text = str(get_hospitalized)
+		self.ids.death_detail.text = str(get_deaths)
+		self.ids.incident_rate.text = str(get_ir)
+		self.ids.mortality_rate.text = str(get_mr)
+		
+
 
 			
 			
@@ -163,6 +199,10 @@ class MainFunction(Screen):
 		for fetch_data in range(len(covid_data)):
 			self.ids[str(covid_data[fetch_data])].text = str(data[fetch_data])
 			self.ids[str(global_covid_data[fetch_data])].text = str(global_data[fetch_data])
+
+		
+
+
 class MainApp(MDApp):
 	def build(self):
 		return MainFunction()
