@@ -1,5 +1,8 @@
 <TestFunction>:
-	BoxLayout:
-		id: test_graph
-		
-		Graph:
+	Button:
+		text: "show"
+		on_release:
+			root.show_graph()
+	GridLayout:
+		cols: 1
+		id: show_here

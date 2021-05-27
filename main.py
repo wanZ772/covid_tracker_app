@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
+from kivy.garden.graph import Graph, MeshLinePlot
 from matplotlib import pyplot
 from random import randrange
 from kivy.uix.button import Button
@@ -143,21 +144,25 @@ class MainFunction(Screen):
 								)
 						)
 			elif (get_button == 3):
-				total_cases = []
-				week_day = []
-				day = "{}".format(date.today()).split('-')
-				minus_day = 7
+				total_cases = [6493,6320,6976,6509,7289,7478,7857]
+				days = [0,2,3,4,5,6]
+				graph = Graph(x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
+				  xmin=0, xmax=6, ymin=1, ymax=10)
+			
+				plot = MeshLinePlot(color=[1, 0, 0, 1])
 				
 				
-				for i in range(7):
-					week_day.append("{}/{}".format(int(day[2]) - minus_day, day[1]))
-					total_cases.append(randrange(1000, 10000))
-					minus_day -= 1
+				pointers = []
 				
-				pyplot.plot(week_day,total_cases, linestyle = 'dashed', marker = '*', markerfacecolor = 'blue', color = 'red')
-				pyplot.savefig('week.png')
+				for i in days:
+					print(total_cases[i] / 1000)
+					pointers.append((i, total_cases[i] / 1000))
+				plot.points = pointers
 				
-				self.ids.chart_for_week.source = 'week.png'
+				
+				graph.add_plot(plot)
+				self.ids.chart_for_week.add_widget(graph)
 					
 					
 			
