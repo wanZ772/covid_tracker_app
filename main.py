@@ -144,7 +144,7 @@ class MainFunction(Screen):
 								)
 						)
 			elif (get_button == 3):
-				total_cases = [6493,6320,6976,6509,7289,7478,7857]
+				total_cases = [6320,6976,6509,7289,7478,7857, 8290]
 				days = [0,2,3,4,5,6]
 				graph = Graph(x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
 				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 

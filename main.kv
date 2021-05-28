@@ -1,13 +1,5 @@
 <MainFunction>:
-
-
-
-
-			
-			
-			
-			
-			
+	
 	MDToolbar:
 		id: tool_bar
 		top: root.height
@@ -128,172 +120,175 @@
 						id: total_detail
 					
 					
-			FloatLayout:
-				MDSwiper:
-					top: (root.height - total_detail_card.height) - 130
-					MDSwiperItem:
-						MDCard:
-							elevation: 10
-							orientation: 'vertical'
-							size_hint_y: None
-							height: 50
-							
-							
-							canvas.before:
-								Color:
-									rgba: 72/255,72/255,72/255,1
-								Rectangle:
-									size: self.size
-									pos: self.pos
-							
-							
-							MDLabel:
-								
-								theme_text_color: 'Custom'
-								text_color: 1,1,1,1
-								
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Total today: "
-							MDLabel:
-								halign: 'right'
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Null"
-								theme_text_color: 'Custom'
-								text_color: 1,0,1,1
-								id: total_today_detail
-						
-						
-						
-						
-						
-					MDSwiperItem:
-						MDCard:
-							orientation: 'vertical'
-							size_hint_y: None
-							height: 50
-							
-							
-							canvas.before:
-								Color:
-									rgba: 72/255,72/255,72/255,1
-								Rectangle:
-									size: self.size
-									pos: self.pos
-							
-							
-							MDLabel:
-								
-								theme_text_color: 'Custom'
-								text_color: 1,1,1,1
-								
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Total actives:"
-							MDLabel:
-								halign: 'right'
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Null"
-								theme_text_color: 'Custom'
-								text_color: 0,102/255,1,1
-								id: active_detail
-					MDSwiperItem:
-						MDCard:
-							orientation: 'vertical'
-							size_hint_y: None
-							height: 50
-							width: 50
-							
-							
-							canvas.before:
-								Color:
-									rgba: 72/255,72/255,72/255,1
-								Rectangle:
-									size: self.size
-									pos: self.pos
-							
-							
-							MDLabel:
-								
-								theme_text_color: 'Custom'
-								text_color: 1,1,1,1
-								
-
-								text: "Total recovered:"
-							MDLabel:
-								halign: 'right'
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Null"
-								theme_text_color: 'Custom'
-								text_color: 0, 230/255,77/255,1
-								id: recovered_detail
-								
-					MDSwiperItem:
-						MDCard:
-							orientation: 'vertical'
-							size_hint_y: None
-							height: 50
-							width: 50
-							
-							
-							canvas.before:
-								Color:
-									rgba: 0,0,0,1
-								Rectangle:
-									size: self.size
-									pos: self.pos
-							
-							
-							MDLabel:
-								
-								theme_text_color: 'Custom'
-								text_color: 1,1,1,1
-								
-
-								text: "Incident Rate:"
-							MDLabel:
-								halign: 'right'
-								size_hint_y: None
-								height: self.texture_size[1]
-								text: "Null"
-								theme_text_color: 'Custom'
-								text_color: 1,0,0,1
-								id: incident_rate
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-								
-							
+#######################
+			MDGridLayout:
+				cols: 1
 				FloatLayout:
-					MDSwiper:
+					ScrollView:
+						size_hint_y: None
+						top: (root.height - total_detail_card.height) - 130
+						BoxLayout:
+							orientation: 'horizontal'
+							size_hint_x: 3.5
+							spacing: 30
+							padding: 10
+							#top: (root.height - total_detail_card.height) - 130
+							
+							
+							
+							
+							MDCard:
+								elevation: 10
+								orientation: 'vertical'
+								size_hint_y: None
+								height: 50
+								
+								
+								canvas.before:
+									Color:
+										rgba: 72/255,72/255,72/255,1
+									Rectangle:
+										size: self.size
+										pos: self.pos
+								
+								
+								MDLabel:
+									
+									theme_text_color: 'Custom'
+									text_color: 1,1,1,1
+									
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Total today: "
+								MDLabel:
+									halign: 'right'
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Null"
+									theme_text_color: 'Custom'
+									text_color: 1,0,1,1
+									id: total_today_detail
+							
+							
+							
+							
+							
+
+							MDCard:
+								orientation: 'vertical'
+								size_hint_y: None
+								height: 50
+								
+								
+								canvas.before:
+									Color:
+										rgba: 72/255,72/255,72/255,1
+									Rectangle:
+										size: self.size
+										pos: self.pos
+								
+								
+								MDLabel:
+									
+									theme_text_color: 'Custom'
+									text_color: 1,1,1,1
+									
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Total actives:"
+								MDLabel:
+									halign: 'right'
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Null"
+									theme_text_color: 'Custom'
+									text_color: 0,102/255,1,1
+									id: active_detail
+
+							MDCard:
+								orientation: 'vertical'
+								size_hint_y: None
+								height: 50
+								width: 50
+								
+								
+								canvas.before:
+									Color:
+										rgba: 72/255,72/255,72/255,1
+									Rectangle:
+										size: self.size
+										pos: self.pos
+								
+								
+								MDLabel:
+									
+									theme_text_color: 'Custom'
+									text_color: 1,1,1,1
+									
+
+									text: "Total recovered:"
+								MDLabel:
+									halign: 'right'
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Null"
+									theme_text_color: 'Custom'
+									text_color: 0, 230/255,77/255,1
+									id: recovered_detail
+										
+
+							MDCard:
+								orientation: 'vertical'
+								size_hint_y: None
+								height: 50
+								width: 50
+								
+								
+								canvas.before:
+									Color:
+										rgba: 0,0,0,1
+									Rectangle:
+										size: self.size
+										pos: self.pos
+								
+								
+								MDLabel:
+									
+									theme_text_color: 'Custom'
+									text_color: 1,1,1,1
+									
+
+									text: "Incident Rate:"
+								MDLabel:
+									halign: 'right'
+									size_hint_y: None
+									height: self.texture_size[1]
+									text: "Null"
+									theme_text_color: 'Custom'
+									text_color: 1,0,0,1
+									id: incident_rate
+						
+						
+						
+
+						
+						
+#######################
+					
+#######################								
+				FloatLayout:
+					ScrollView:
 						top: root.height / 2.1
-						MDSwiperItem:
+						size_hint_y: None
+						BoxLayout:
+							orientation: 'horizontal'
+							size_hint_x: 3.5
+							spacing: 30
+							padding: 10
+							
+						
 							MDCard:
 								orientation: 'vertical'
 								size_hint_y: None
@@ -325,7 +320,7 @@
 									text_color: 0, 230/255,77/255,1
 									id: people_tested
 							
-						MDSwiperItem:
+						
 							MDCard:
 								orientation: 'vertical'
 								size_hint_y: None
@@ -358,7 +353,7 @@
 									id: people_hospitalized
 							
 
-						MDSwiperItem:
+						
 							MDCard:
 								orientation: 'vertical'
 								size_hint_y: None
@@ -390,7 +385,7 @@
 									id: death_detail
 							
 							
-						MDSwiperItem:
+						
 							MDCard:
 								orientation: 'vertical'
 								size_hint_y: None
@@ -421,6 +416,7 @@
 									theme_text_color: 'Custom'
 									text_color: 1,0,0,1
 									id: mortality_rate
+#######################
 
 
 
@@ -449,41 +445,41 @@
 			
 								
 					
-				MDGridLayout:
-					cols: 1
-					padding: 10
-					pos_hint: {'top': .25}
-					MDCard:
-						orientation: 'vertical'
+			MDGridLayout:
+				cols: 1
+				padding: 10
+				pos_hint: {'top': .25}
+				MDCard:
+					orientation: 'vertical'
+					size_hint_y: None
+					height: 50
+					
+					
+					canvas.before:
+						Color:
+							rgba: 0,0,0,1
+						Rectangle:
+							size: self.size
+							pos: self.pos
+					
+					
+					MDLabel:
+						
+						theme_text_color: 'Custom'
+						text_color: 1,1,1,1
+						
 						size_hint_y: None
-						height: 50
+						height: self.texture_size[1]
+						text: "Total confirmed ICU:"
+					MDLabel:
+						halign: 'right'
+						size_hint_y: None
+						height: self.texture_size[1]
+						text: "Null"
 						
-						
-						canvas.before:
-							Color:
-								rgba: 0,0,0,1
-							Rectangle:
-								size: self.size
-								pos: self.pos
-						
-						
-						MDLabel:
-							
-							theme_text_color: 'Custom'
-							text_color: 1,1,1,1
-							
-							size_hint_y: None
-							height: self.texture_size[1]
-							text: "Total confirmed ICU:"
-						MDLabel:
-							halign: 'right'
-							size_hint_y: None
-							height: self.texture_size[1]
-							text: "Null"
-							
-							theme_text_color: 'Custom'
-							text_color: 1,0,0,1
-							id: total_icu
+						theme_text_color: 'Custom'
+						text_color: 1,0,0,1
+						id: total_icu
 					
 					
 					
