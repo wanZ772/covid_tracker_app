@@ -16,7 +16,7 @@
 		
 		MDFlatButton:
 			size_hint: 1,.2
-			
+			markup: True
 			text: "[b]Global[/b]"
 			
 			font_size: '20sp'
@@ -29,6 +29,7 @@
 		
 		MDFlatButton:
 			size_hint: 1,.2
+			markup: True
 			text: "Local"
 			id: local_button
 			theme_text_color: 'Custom'
@@ -59,12 +60,7 @@
 					size_hint_y: None
 					height: 50
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1 
-						Rectangle:		
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					MDLabel:
 						size_hint_y: None
@@ -95,12 +91,9 @@
 					
 					id: total_detail_card
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1 
-						Rectangle:		
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
+					
+					
 					MDLabel:
 						size_hint_y: None
 						height: self.texture_size[1]
@@ -108,7 +101,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						text: "Last Update Data:"
+						text: "Total confirmed cases:"
 						
 					MDLabel:
 						halign: 'right'
@@ -146,12 +139,7 @@
 								height: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -182,12 +170,7 @@
 								height: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -214,12 +197,7 @@
 								width: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -246,12 +224,7 @@
 								width: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 0,0,0,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 0,0,0,1
 								
 								
 								MDLabel:
@@ -296,12 +269,7 @@
 								width: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -328,12 +296,7 @@
 								width: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -360,12 +323,7 @@
 								height: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 72/255,72/255,72/255,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 72/255,72/255,72/255,1
 								
 								
 								MDLabel:
@@ -393,12 +351,7 @@
 								width: 50
 								
 								
-								canvas.before:
-									Color:
-										rgba: 0,0,0,1
-									Rectangle:
-										size: self.size
-										pos: self.pos
+								md_bg_color: 0,0,0,1
 								
 								
 								MDLabel:
@@ -455,12 +408,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 0,0,0,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 0,0,0,1
 					
 					
 					MDLabel:
@@ -485,8 +433,21 @@
 					
 					
 						
-						
-						
+					
+		Screen:
+			name: 'info_screen'
+			MDGridLayout:
+				cols: 1
+				MDCard:
+					orientation: 'vertical'
+					elevation: 20
+					size_hint_y: None
+					height: 50
+					
+					MDLabel:
+						text: "ok"
+				
+
 		MDScreen:
 			name: 'global_screen'
 			
@@ -505,12 +466,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -538,13 +494,7 @@
 					size_hint_y: None
 					height: 50
 					
-					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -573,12 +523,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -609,13 +554,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
-					
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					MDLabel:
 						
@@ -650,12 +589,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -686,12 +620,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -722,13 +651,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
-					
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					MDLabel:
 						
@@ -755,12 +678,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -789,12 +707,7 @@
 					height: 50
 					
 					
-					canvas.before:
-						Color:
-							rgba: 72/255,72/255,72/255,1
-						Rectangle:
-							size: self.size
-							pos: self.pos
+					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
@@ -838,52 +751,40 @@
 						size_hint_y: .2
 		Screen:
 			name: 'chart_screen'
-			MDLabel:
-				pos_hint: {'center_y':.85}
-				text: "Chart for 7 days"
-				halign: "center"
-				id: chart_screen_title
-				
-				MDCard:
-					canvas.before:
-						Color:
-							rgba: 0,0,0,1
-						Rectangle:
-							pos: self.pos
-							size: self.size
-					top: chart_screen_title.center_y - 20
-					size_hint: None, None
-					height: (root.height / 2)
-					width: root.width
-					id: chart_for_week
-				
-				MDCard:
-					orientation: 'vertical'
-					size_hint_y: None
-					elevation: 20
-					height: 20
-					right: (root.width / 2) + (self.width / 2)
-					top: chart_for_week.height - (self.height * 6)
-					width: root.width
-					canvas.before:
-						Color:
-							rgba: 0,0,0,1
+			FloatLayout:
+				MDLabel:
+					pos_hint: {'center_y':.85}
+					text: "Chart for 7 days"
+					halign: "center"
+					id: chart_screen_title
 					
-					MDLabel:
-						halign: 'center'
+					MDCard:
+						
+						top: chart_screen_title.center_y - 20
+						size_hint: None, None
+						height: (root.height / 2)
+						width: root.width
+						id: chart_for_week
+						md_bg_color: 0,0,0,1
+					
+					MDCard:
+						orientation: 'vertical'
 						size_hint_y: None
-						height: self.texture_size[1]
-						text: "Cases X 1000"
+						elevation: 20
+						height: 20
+						right: (root.width / 2) + (self.width / 2)
+						top: chart_for_week.height - (self.height * 8)
+						width: root.width
+						
+						MDLabel:
+							halign: 'center'
+							size_hint_y: None
+							height: self.texture_size[1]
+							text: "Cases X 1000"
 			
 						
 		
-	MDGridLayout:
-		cols: 6
-		pos_hint: {'top':.1}
-		center_x: root.width / 6
-		
-		
-		
+	FloatLayout:
 		canvas.before:
 			Color:
 				rgba: 0,0,0,1
@@ -899,7 +800,7 @@
 			text_color: 1,1,1,1
 			icon: 'view-dashboard-outline'
 			id: view-dashboard-outline
-			
+			right: root.width / 6
 			on_release:
 				screen_manager.current = 'global_screen'
 				root.highlight_button(0)
@@ -909,7 +810,7 @@
 			text_color: 1,1,1,1
 			icon: 'newspaper-variant-outline'
 			id: newspaper-variant-outline
-			
+			right: root.width / 3
 			on_release:
 				screen_manager.current = 'details_screen'
 				root.highlight_button(1)
@@ -919,7 +820,7 @@
 			text_color: 1,1,1,1
 			icon: 'menu'
 			id: menu
-			
+			right: root.width / 2
 			on_release:
 				screen_manager.current = 'state_screen'
 				root.highlight_button(2)
@@ -930,7 +831,7 @@
 			text_color: 1,1,1,1
 			icon: 'chart-line'
 			id: chart-line
-			
+			right: root.width  / 1.5
 			on_release:
 				screen_manager.current = 'chart_screen'
 				root.highlight_button(3)
@@ -939,19 +840,20 @@
 		MDIconButton:
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
-			icon: 'database-outline'
-			id: database-outline
-			
+			icon: 'database'
+			id: database
+			right: root.width / 1.2
 			on_release:
 				root.highlight_button(4)
 		
-		
+
+
 		MDIconButton:
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'information-outline'
 			id: information-outline
-			
+			right: root.width
 			on_release:
 				root.highlight_button(5)
 		

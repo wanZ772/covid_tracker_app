@@ -1,8 +1,7 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
-from kivy.garden.graph import Graph, MeshLinePlot
-from matplotlib import pyplot
+from kivy.garden.graph import LinePlot, Graph
 from random import randrange
 from kivy.uix.button import Button
 from kivy.utils import platform 
@@ -28,7 +27,7 @@ for global_data in range(len(api)):
 global_data = [global_confimed,global_deaths,global_recover,global_active]
 
 for i in api:
-	if (i['attributes']['OBJECTID'] == 108):
+	if (i['attributes']['OBJECTID'] == 109):
 		get_total = i['attributes']['Confirmed']
 		get_deaths = i['attributes']['Deaths']
 		get_recover = i['attributes']['Recovered']
@@ -53,15 +52,15 @@ footer_buttons_outline = [
 		'newspaper-variant-outline',
 		'menu',
 		'chart-line',
-		'database-outline',
+		'database',
 		'information-outline'
 	]
 footer_buttons = [
 		'view-dashboard',
 		'newspaper-variant',
-		'microsoft-xbox-controller-menu',
+		'xbox-controller-menu',
 		'chart-line-stacked',
-		'database',
+		'database-check',
 		'information'
 	]
 
@@ -144,13 +143,14 @@ class MainFunction(Screen):
 								)
 						)
 			elif (get_button == 3):
-				total_cases = [6320,6976,6509,7289,7478,7857, 8290]
+				self.ids.chart_for_week.clear_widgets()
+				total_cases = [6976,6509,7289,7478,7857,8290,9020]
 				days = [0,2,3,4,5,6]
 				graph = Graph(x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
 				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
 				  xmin=0, xmax=6, ymin=1, ymax=10)
 			
-				plot = MeshLinePlot(color=[1, 0, 0, 1])
+				plot = LinePlot(line_width = 1, color=[1, 0, 0, 1])
 				
 				
 				pointers = []
