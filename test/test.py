@@ -1,17 +1,22 @@
-from kivymd.app import MDApp
-from kivy.uix.screenmanager import Screen
-from kivy.utils import platform
+import csv
 
-if (platform == 'win'):
-	from kivy.core.window import Window
+date_filter = []
+
+with open('data.csv', 'r') as raw_data:
+	data = csv.DictReader(raw_data)
 	
-	Window.size = (300,500)
-
-
-class TestFunction(Screen):
-	pass
-class TestApp(MDApp):
-	def build(self):
-		return TestFunction()
-if ('__main__' == __name__):
-	 TestApp().run()
+	for check_date in data:
+		if (check_date['date'] not in date_filter):
+			date_filter.append(check_date['date'])
+		else:
+			pass
+			
+	raw_data.close()
+	
+with open('data.csv', 'r') as raw_data:
+	data = csv.DictReader(raw_data)
+	
+	for retrive_data in data:
+		if (retrive_data['date'] == date_filter[-1]):
+			state = retrive_data['state'].replace('WP ', '')
+			print(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases'])

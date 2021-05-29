@@ -42,8 +42,24 @@
 		id: screen_manager
 	
 		
-		
-
+		Screen:
+			name: 'refresh_database'
+			
+			
+			MDSpinner:
+				active: True
+			
+			
+			
+			MDIconButton:
+				pos_hint: {'center_x': .5, 'center_y':.5}
+				user_font_size: '120sp'
+				id: refresh_status
+				icon: 'database-refresh'
+			
+			
+			
+			
 		Screen:
 			name: 'details_screen'
 			
@@ -735,7 +751,7 @@
 			name: 'state_screen'
 			MDLabel:
 				pos_hint: {'center_y': .85}
-				text: "Cases by states"
+				text: "New cases by states"
 				halign: 'center'
 			
 			ScrollView:
@@ -775,12 +791,7 @@
 						right: (root.width / 2) + (self.width / 2)
 						top: chart_for_week.height - (self.height * 8)
 						width: root.width
-						
-						MDLabel:
-							halign: 'center'
-							size_hint_y: None
-							height: self.texture_size[1]
-							text: "Cases X 1000"
+
 			
 						
 		
@@ -840,10 +851,11 @@
 		MDIconButton:
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
-			icon: 'database'
-			id: database
+			icon: 'database-refresh'
+			id: database-refresh
 			right: root.width / 1.2
 			on_release:
+				screen_manager.current = 'refresh_database'
 				root.highlight_button(4)
 		
 

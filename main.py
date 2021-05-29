@@ -7,6 +7,8 @@ from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests
 from datetime import date
+from threading import Thread
+from time import sleep
 
 
 
@@ -52,7 +54,7 @@ footer_buttons_outline = [
 		'newspaper-variant-outline',
 		'menu',
 		'chart-line',
-		'database',
+		'database-refresh',
 		'information-outline'
 	]
 footer_buttons = [
@@ -60,7 +62,7 @@ footer_buttons = [
 		'newspaper-variant',
 		'xbox-controller-menu',
 		'chart-line-stacked',
-		'database-check',
+		'database-refresh',
 		'information'
 	]
 
@@ -69,6 +71,14 @@ global_covid_data = ['global_total', 'global_active', 'global_recovered', 'globa
 
 
 class MainFunction(Screen):
+	def refresh_database(self):
+		with open('data.csv', 'w') as write_database:
+			write_database.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
+			write_database.close
+		self.ids.refresh_status.icon = 'database-check'
+		self.ids['database-refresh'].icon = 'database-check'
+		sleep(1)
+		self.ids.screen_manager.current = 'global_screen'
 	def on_touch_move(self, move):
 		if ((self.ids.screen_manager.current == 'global_screen') or (self.ids.screen_manager.current == 'local_screen')):
 			if (move.x < move.ox):
@@ -145,19 +155,30 @@ class MainFunction(Screen):
 			elif (get_button == 3):
 				self.ids.chart_for_week.clear_widgets()
 				total_cases = [6976,6509,7289,7478,7857,8290,9020]
-				days = [0,2,3,4,5,6]
-				graph = Graph(x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+				days = []
+				
+				day = "{}".format(date.today()).split('-')
+				
+				minus_day = 7
+				
+				for minus in range(0,7):
+					days.append(int(day[2]) - minus)
+				days = sorted(days)
+				print(days)
+				
+				
+				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
 				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
-				  xmin=0, xmax=6, ymin=1, ymax=10)
+				  xmin=days[0], xmax=days[6], ymin=1, ymax=10)
 			
 				plot = LinePlot(line_width = 1, color=[1, 0, 0, 1])
 				
 				
 				pointers = []
 				
-				for i in days:
+				for i in range(len(days)):
 					print(total_cases[i] / 1000)
-					pointers.append((i, total_cases[i] / 1000))
+					pointers.append((days[i], total_cases[i] / 1000))
 				plot.points = pointers
 				
 				
@@ -165,7 +186,9 @@ class MainFunction(Screen):
 				self.ids.chart_for_week.add_widget(graph)
 					
 					
-			
+			elif (get_button == 4):
+				print(1)
+				Thread(target = self.refresh_database).start()
 		else:
 			self.add_widget(self.ids.statistic_mode)
 			
