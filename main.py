@@ -79,7 +79,20 @@ class MainFunction(Screen):
 						)
 				)
 	def refresh_database(self):
+		global new_state_cases
 		self.ids.screen_manager.current = 'refresh_database'
+		date_filter = []
+		with open('data.csv', 'w') as write_data:
+			try:
+				write_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
+			except:
+				return self.refresh_database()
+			write_data.close()
+		self.ids.refresh_status.icon = 'database-check'
+		self.ids.refresh_animation.active = False
+		
+			
+		# self.ids.screen_manager.current =
 	def on_touch_move(self, move):
 		if ((self.ids.screen_manager.current == 'global_screen') or (self.ids.screen_manager.current == 'local_screen')):
 			if (move.x < move.ox):
@@ -138,20 +151,16 @@ class MainFunction(Screen):
 			self.ids.local_button.font_size = '15sp'
 			self.ids.global_button.font_size = '20sp'
 	def highlight_button(self, get_button):
+		global new_state_cases
 		for i in range(6):
 			self.ids[str(footer_buttons_outline[i])].icon = footer_buttons_outline[i]
 		self.ids[str(footer_buttons_outline[get_button])].icon = footer_buttons[get_button]
 		
 		if (get_button != 0):
 			self.remove_widget(self.ids.statistic_mode)
-			
+			date_filter = []
 			if (get_button == 2):
-				# Thread(target = self.refresh_database).start()
-				date_filter = []
-				with open('data.csv', 'w') as write_data:
-					write_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
-					write_data.close()
-					
+				self.ids.cases_by_states.clear_widgets()
 				with open('data.csv', 'r') as raw_data:
 					data = csv.DictReader(raw_data)
 					
@@ -164,21 +173,17 @@ class MainFunction(Screen):
 					new_state_cases = []
 					for retrive_data in data:
 						if (retrive_data['date'] == date_filter[-1]):
-							new_state_cases.append("{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases']))
-					raw_data.close()
-				
-				
-				for i in new_cases_in_state:
-					print(i)
-					self.ids.cases_by_states.add_widget(
-							Button(
-									text = i
+							# new_state_cases.append("{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases']))
+							self.ids.cases_by_states.add_widget(
+									Button(
+											text = "{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases'])
+										)
 								)
-						)
-				self.ids.screen_manager.current = 'state_screen'
+					raw_data.close()
+
 			elif (get_button == 3):
 				self.ids.chart_for_week.clear_widgets()
-				total_cases = [6976,6509,7289,7478,7857,8290,9020]
+				total_cases = [6509,7289,7478,7857,8290,9020,6999]
 				days = []
 				
 				day = "{}".format(date.today()).split('-')
@@ -191,9 +196,9 @@ class MainFunction(Screen):
 				print(days)
 				
 				
-				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 2, y_ticks_major = 2, 
 				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
-				  xmin=days[0], xmax=days[6], ymin=1, ymax=10)
+				  xmin=days[0], xmax=days[6], ymin=0, ymax=10)
 			
 				plot = LinePlot(line_width = 1, color=[1, 0, 0, 1])
 				
@@ -218,7 +223,14 @@ class MainFunction(Screen):
 			
 
 	def test(self):
-		pass
+		for i in new_state_cases:
+			print(i)
+			self.ids.cases_by_states.add_widget(
+					Button(
+							text = i
+						)
+				)
+		self.ids.screen_manager.current = 'state_screen'
 	def __init__(self):
 		super().__init__()
 		

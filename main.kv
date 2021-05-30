@@ -47,6 +47,7 @@
 			
 			
 			MDSpinner:
+				id: refresh_animation
 				active: True
 			
 			
@@ -751,9 +752,9 @@
 			name: 'state_screen'
 			MDLabel:
 				pos_hint: {'center_y': .85}
-				text: "New cases by states"
+				text: "New cases by state"
 				halign: 'center'
-			
+				
 			ScrollView:
 				pos_hint: {'top': .8}
 				BoxLayout:
@@ -833,6 +834,7 @@
 			id: menu
 			right: root.width / 2
 			on_release:
+				screen_manager.current = 'state_screen'
 				root.highlight_button(2)
 		
 		
