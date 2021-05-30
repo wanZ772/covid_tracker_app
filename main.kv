@@ -10,7 +10,7 @@
 		spacing: root.width /2
 		padding: 20
 		size_hint_y: None
-		top: (root.height - tool_bar.height) + (tool_bar.height - 30)
+		top: (root.height - tool_bar.height)
 		
 		id: statistic_mode
 		
@@ -473,22 +473,21 @@
 				padding: 30
 				spacing: 20
 				pos_hint: {'top':.8}
-				
+				size_hint_y: .7
 				
 				
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
+				#	height: self.height
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
 					
 					
 					MDLabel:
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
@@ -508,8 +507,8 @@
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
+				#	height: 50
 					
 					md_bg_color: 72/255,72/255,72/255,1
 					
@@ -519,8 +518,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						text: "Total confirmed actives:"
 					MDLabel:
 						halign: 'right'
@@ -536,8 +534,8 @@
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
+				#	height: 50
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -548,8 +546,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						text: "Total confirmed recovered:"
 					MDLabel:
 						halign: 'right'
@@ -567,8 +564,8 @@
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
+				#	height: 50
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -577,9 +574,6 @@
 						
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
-						
-						size_hint_y: None
-						height: self.texture_size[1]
 						text: "Total confirmed deaths:"
 					MDLabel:
 						halign: 'right'
@@ -597,13 +591,13 @@
 				cols: 1
 				padding: 30
 				spacing: 20
-				pos_hint: {'top':.85}
+				pos_hint: {'top':.75}
+				size_hint_y: .7
 				
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.5
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -614,8 +608,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+		
 						text: "Total confirmed cases:"
 					MDLabel:
 						halign: 'right'
@@ -633,8 +626,7 @@
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.5
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -645,8 +637,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+	
 						text: "Total confirmed today: "
 					MDLabel:
 						halign: 'right'
@@ -664,8 +655,7 @@
 
 				MDCard:
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.5
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -675,8 +665,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+		
 						text: "Total confirmed actives:"
 					MDLabel:
 						halign: 'right'
@@ -691,8 +680,7 @@
 				
 				MDCard:
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.5
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -703,8 +691,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+		
 						text: "Total confirmed recovered:"
 					MDLabel:
 						halign: 'right'
@@ -720,8 +707,7 @@
 				
 				MDCard:
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.5
 					
 					
 					md_bg_color: 72/255,72/255,72/255,1
@@ -732,8 +718,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						text: "Total confirmed deaths:"
 					MDLabel:
 						halign: 'right'
@@ -775,28 +760,21 @@
 			name: 'chart_screen'
 			FloatLayout:
 				MDLabel:
-					pos_hint: {'center_y':.85}
+					pos_hint: {'center_y':.7}
 					text: "Chart for 7 days"
 					halign: "center"
 					id: chart_screen_title
 					
 					MDCard:
 						
-						top: chart_screen_title.center_y - 20
+						top: chart_screen_title.center_y - 50
 						size_hint: None, None
 						height: (root.height / 2)
 						width: root.width
 						id: chart_for_week
 						md_bg_color: 0,0,0,1
 					
-					MDCard:
-						orientation: 'vertical'
-						size_hint_y: None
-						elevation: 20
-						height: 20
-						right: (root.width / 2) + (self.width / 2)
-						top: chart_for_week.height - (self.height * 8)
-						width: root.width
+
 
 			
 						
@@ -825,8 +803,8 @@
 		MDIconButton:
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
-			icon: 'newspaper-variant-outline'
-			id: newspaper-variant-outline
+			icon: 'card-text-outline'
+			id: card-text-outline
 			right: root.width / 3
 			on_release:
 				screen_manager.current = 'details_screen'

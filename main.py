@@ -51,7 +51,7 @@ if (platform == 'win'):
 
 footer_buttons_outline = [
 		'view-dashboard-outline',
-		'newspaper-variant-outline',
+		'card-text-outline',
 		'menu',
 		'chart-line',
 		'database-refresh',
@@ -59,7 +59,7 @@ footer_buttons_outline = [
 	]
 footer_buttons = [
 		'view-dashboard',
-		'newspaper-variant',
+		'card-text',
 		'xbox-controller-menu',
 		'chart-line-stacked',
 		'database-refresh',
@@ -199,11 +199,11 @@ class MainFunction(Screen):
 				print(days)
 				
 				
-				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 2, y_ticks_major = 2, 
+				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
 				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
 				  xmin=days[0], xmax=days[6], ymin=0, ymax=10)
 			
-				plot = LinePlot(line_width = 1, color=[1, 0, 0, 1])
+				plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
 				
 				
 				pointers = []
