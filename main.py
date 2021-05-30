@@ -5,7 +5,7 @@ from kivy.garden.graph import LinePlot, Graph
 from random import randrange
 from kivy.uix.button import Button
 from kivy.utils import platform 
-import requests
+import requests, csv
 from datetime import date
 from threading import Thread
 from time import sleep
@@ -69,16 +69,17 @@ footer_buttons = [
 covid_data = ['total', 'active', 'recovered', 'deaths']
 global_covid_data = ['global_total', 'global_active', 'global_recovered', 'global_deaths']
 
-
+new_cases_in_state = []
 class MainFunction(Screen):
+	def retrive_cases_in_state(self):
+		for i in new_cases_in_state:
+			self.ids.cases_by_states.add_widget(
+					Button(
+							text = i
+						)
+				)
 	def refresh_database(self):
-		with open('data.csv', 'w') as write_database:
-			write_database.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
-			write_database.close
-		self.ids.refresh_status.icon = 'database-check'
-		self.ids['database-refresh'].icon = 'database-check'
-		sleep(1)
-		self.ids.screen_manager.current = 'global_screen'
+		self.ids.screen_manager.current = 'refresh_database'
 	def on_touch_move(self, move):
 		if ((self.ids.screen_manager.current == 'global_screen') or (self.ids.screen_manager.current == 'local_screen')):
 			if (move.x < move.ox):
@@ -145,13 +146,36 @@ class MainFunction(Screen):
 			self.remove_widget(self.ids.statistic_mode)
 			
 			if (get_button == 2):
-				self.ids.cases_by_states.clear_widgets()
-				for i in states:
+				# Thread(target = self.refresh_database).start()
+				date_filter = []
+				with open('data.csv', 'w') as write_data:
+					write_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
+					write_data.close()
+					
+				with open('data.csv', 'r') as raw_data:
+					data = csv.DictReader(raw_data)
+					
+					for check_date in data:
+						if (check_date['date'] not in date_filter):
+							date_filter.append(check_date['date'])
+					raw_data.close()
+				with open('data.csv', 'r') as raw_data:
+					data = csv.DictReader(raw_data)
+					new_state_cases = []
+					for retrive_data in data:
+						if (retrive_data['date'] == date_filter[-1]):
+							new_state_cases.append("{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases']))
+					raw_data.close()
+				
+				
+				for i in new_cases_in_state:
+					print(i)
 					self.ids.cases_by_states.add_widget(
 							Button(
-									text = "{}: Null".format(i)
+									text = i
 								)
 						)
+				self.ids.screen_manager.current = 'state_screen'
 			elif (get_button == 3):
 				self.ids.chart_for_week.clear_widgets()
 				total_cases = [6976,6509,7289,7478,7857,8290,9020]
