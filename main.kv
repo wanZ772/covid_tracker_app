@@ -754,7 +754,11 @@
 				pos_hint: {'center_y': .85}
 				text: "New cases by state"
 				halign: 'center'
-				
+			MDLabel:
+				halign: 'center'
+				pos_hint: {'center_x':.5, 'center_y':.5}
+				font_size: '30sp'
+				id: no_database	
 			ScrollView:
 				pos_hint: {'top': .8}
 				BoxLayout:
@@ -764,6 +768,7 @@
 					MDGridLayout:
 						cols: 1
 						id: cases_by_states
+						
 					Widget:
 						size_hint_y: .2
 		Screen:

@@ -29,7 +29,7 @@ for global_data in range(len(api)):
 global_data = [global_confimed,global_deaths,global_recover,global_active]
 
 for i in api:
-	if (i['attributes']['OBJECTID'] == 109):
+	if (i['attributes']['ISO3'] == 'MYS'):
 		get_total = i['attributes']['Confirmed']
 		get_deaths = i['attributes']['Deaths']
 		get_recover = i['attributes']['Recovered']
@@ -161,25 +161,28 @@ class MainFunction(Screen):
 			date_filter = []
 			if (get_button == 2):
 				self.ids.cases_by_states.clear_widgets()
-				with open('data.csv', 'r') as raw_data:
-					data = csv.DictReader(raw_data)
-					
-					for check_date in data:
-						if (check_date['date'] not in date_filter):
-							date_filter.append(check_date['date'])
-					raw_data.close()
-				with open('data.csv', 'r') as raw_data:
-					data = csv.DictReader(raw_data)
-					new_state_cases = []
-					for retrive_data in data:
-						if (retrive_data['date'] == date_filter[-1]):
-							# new_state_cases.append("{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases']))
-							self.ids.cases_by_states.add_widget(
-									Button(
-											text = "{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases'])
-										)
-								)
-					raw_data.close()
+				try:
+					with open('data.csv', 'r') as raw_data:
+						data = csv.DictReader(raw_data)
+						
+						for check_date in data:
+							if (check_date['date'] not in date_filter):
+								date_filter.append(check_date['date'])
+						raw_data.close()
+					with open('data.csv', 'r') as raw_data:
+						data = csv.DictReader(raw_data)
+						new_state_cases = []
+						for retrive_data in data:
+							if (retrive_data['date'] == date_filter[-1]):
+								# new_state_cases.append("{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases']))
+								self.ids.cases_by_states.add_widget(
+										Button(
+												text = "{}: {}".format(retrive_data['state'].replace('WP ', ''), retrive_data['new_cases'])
+											)
+									)
+						raw_data.close()
+				except:
+					self.ids.no_database.text = "Please update database first by clicking on database icon"
 
 			elif (get_button == 3):
 				self.ids.chart_for_week.clear_widgets()
