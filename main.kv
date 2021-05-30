@@ -71,17 +71,16 @@
 				spacing: 20
 				pos_hint: {'top':.9}
 				id: top_data_detail
+				size_hint_y: .4
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
 					
 					md_bg_color: 72/255,72/255,72/255,1
 					
 					MDLabel:
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
@@ -103,8 +102,7 @@
 				MDCard:
 					elevation: 10
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
+					size_hint: 1,.02
 					
 					id: total_detail_card
 					
@@ -112,8 +110,7 @@
 					
 					
 					MDLabel:
-						size_hint_y: None
-						height: self.texture_size[1]
+
 						
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
@@ -419,11 +416,11 @@
 				cols: 1
 				padding: 10
 				pos_hint: {'top': .25}
+				size_hint_y: .15
 				MDCard:
 					orientation: 'vertical'
-					size_hint_y: None
-					height: 50
-					
+	
+					size_hint: 1,.05
 					
 					md_bg_color: 0,0,0,1
 					
@@ -433,8 +430,7 @@
 						theme_text_color: 'Custom'
 						text_color: 1,1,1,1
 						
-						size_hint_y: None
-						height: self.texture_size[1]
+					
 						text: "Total confirmed ICU:"
 					MDLabel:
 						halign: 'right'
