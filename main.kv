@@ -435,16 +435,11 @@
 					
 		Screen:
 			name: 'info_screen'
-			MDGridLayout:
-				cols: 1
-				MDCard:
-					orientation: 'vertical'
-					elevation: 20
-					size_hint_y: None
-					height: 50
-					
-					MDLabel:
-						text: "ok"
+			
+			MDLabel:
+				pos_hint: {'center_y': .6}
+				halign: 'center'
+				text: "To contact developer:"
 				
 
 		MDScreen:
@@ -850,5 +845,6 @@
 			id: information-outline
 			right: root.width
 			on_release:
+				screen_manager.current = 'info_screen'
 				root.highlight_button(5)
 		

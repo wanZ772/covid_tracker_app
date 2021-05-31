@@ -87,9 +87,17 @@ class MainFunction(Screen):
 		with open('data.csv', 'w') as write_data:
 			try:
 				write_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
+				write_data.close()
 			except:
 				return self.refresh_database()
 			write_data.close()
+		
+		with open('week_data.csv', 'w') as week_data:
+			try:
+				week_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my.csv').text)
+				week_data.close()
+			except:
+				pass
 		self.ids.refresh_status.icon = 'database-check'
 		self.ids.refresh_animation.active = False
 		
@@ -205,27 +213,7 @@ class MainFunction(Screen):
 					raw_data.close()
 		
 
-				# print(date_filter)
-				# print(date_filter)
-				for seven_days in range(-6, 0):
-					print(date_filter[seven_days])
-					
-				print(date_filter[-6][0])
-				
-				
-				# print("wake up")
-				
-				# total_cases = [6509,7289,7478,7857,8290,9020,6999]
-				# days = []
-				
-				# day = "{}".format(date.today()).split('-')
-				
-				# minus_day = 7
-				
-				# for minus in range(0,7):
-					# days.append(int(day[2]) - minus)
-				# days = sorted(days)
-				# print(days)
+	
 				
 				
 				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(date[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
@@ -239,10 +227,7 @@ class MainFunction(Screen):
 				
 				for seven_days in range(-6, 0):
 					pointers.append((int(date_filter[seven_days][0]), int(date_filter[seven_days][1]) / 1000))
-				print(pointers)
-				# for i in range(len(days)):
-					# print(total_cases[i] / 1000)
-					# pointers.append((days[i], total_cases[i] / 1000))
+				
 				plot.points = pointers
 				
 				
@@ -251,75 +236,12 @@ class MainFunction(Screen):
 				graph.add_plot(plot)
 				self.ids.chart_for_week.add_widget(graph)
 			
-			
-			
-			
-			
-			
-			
-			
-				## complete test code
-			
-				# self.ids.chart_for_week.clear_widgets()
-				# total_cases = [6509,7289,7478,7857,8290,9020,6999]
-				# days = []
-				
-				# day = "{}".format(date.today()).split('-')
-				
-				# minus_day = 7
-				
-				# for minus in range(0,7):
-					# days.append(int(day[2]) - minus)
-				# days = sorted(days)
-				# print(days)
-				
-				
-				# graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
-				  # y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
-				  # xmin=days[0], xmax=days[6], ymin=0, ymax=10)
-			
-				# plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
-				
-				
-				# pointers = []
-				
-				# for i in range(len(days)):
-					# print(total_cases[i] / 1000)
-					# pointers.append((days[i], total_cases[i] / 1000))
-				# plot.points = pointers
-				
-				
-				# graph.add_plot(plot)
-				# self.ids.chart_for_week.add_widget(graph)
-				
-				######################################
-					
 					
 			elif (get_button == 4):
 				print(1)
 				Thread(target = self.refresh_database).start()
 		else:
 			self.add_widget(self.ids.statistic_mode)
-			
-
-	def test(self):
-		sleep(5)
-		print("wake up")
-	def run_loading(self):
-		global loading
-		print("sleeping")
-		sleep(5)
-		print("waking up")
-		loading = False
-		# self.ids.screen_manager.current = 'chart_screen'
-		# return self.graph_plotting()
-	
-	
-	def graph_plotting(self):
-		pass
-		
-		
-		
 
 	def __init__(self):
 		super().__init__()
@@ -363,7 +285,16 @@ class MainFunction(Screen):
 		self.ids.incident_rate.text = str(get_ir)
 		self.ids.mortality_rate.text = str(get_mr)
 		
-
+		try:
+			with open('week_data.csv', 'r') as raw_data:
+				icu = csv.DictReader(raw_data)
+				
+				for get_icu in icu:
+					current_icu = get_icu['icu']
+				raw_data.close()
+			self.ids.total_icu.text = str(current_icu)
+		except:
+			pass
 
 			
 			
@@ -376,6 +307,17 @@ class MainFunction(Screen):
 
 
 class MainApp(MDApp):
+	def on_start(self):
+		try:
+			with open('week_data.csv', 'w') as week_data:
+				week_data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my.csv').text)
+				week_data.close()
+			with open('data.csv', 'w') as data:
+				data.write(requests.get('https://raw.githubusercontent.com/wnarifin/covid-19-malaysia/master/covid-19_my_state.csv').text)
+				data.close()
+		except:
+			pass
+
 	def build(self):
 		return MainFunction()
 if ('__main__' == __name__):
