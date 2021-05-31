@@ -71,6 +71,43 @@ global_covid_data = ['global_total', 'global_active', 'global_recovered', 'globa
 
 new_cases_in_state = []
 class MainFunction(Screen):
+	def graph_plotting(self):
+		sleep(5)
+		self.ids.chart_for_week.clear_widgets()
+		total_cases = [6509,7289,7478,7857,8290,9020,6999]
+		days = []
+		
+		day = "{}".format(date.today()).split('-')
+		
+		minus_day = 7
+		
+		for minus in range(0,7):
+			days.append(int(day[2]) - minus)
+		days = sorted(days)
+		print(days)
+		
+		
+		graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+		  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
+		  xmin=days[0], xmax=days[6], ymin=0, ymax=10)
+	
+		plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
+		
+		
+		pointers = []
+		
+		for i in range(len(days)):
+			print(total_cases[i] / 1000)
+			pointers.append((days[i], total_cases[i] / 1000))
+		plot.points = pointers
+		
+		
+		graph.add_plot(plot)
+		self.ids.chart_for_week.add_widget(graph)
+		
+		
+		self.ids.loading_chart.active = False
+		
 	def retrive_cases_in_state(self):
 		for i in new_cases_in_state:
 			self.ids.cases_by_states.add_widget(
@@ -185,37 +222,55 @@ class MainFunction(Screen):
 					self.ids.no_database.text = "Please update database first by clicking on database icon"
 
 			elif (get_button == 3):
-				self.ids.chart_for_week.clear_widgets()
-				total_cases = [6509,7289,7478,7857,8290,9020,6999]
-				days = []
-				
-				day = "{}".format(date.today()).split('-')
-				
-				minus_day = 7
-				
-				for minus in range(0,7):
-					days.append(int(day[2]) - minus)
-				days = sorted(days)
-				print(days)
-				
-				
-				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
-				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
-				  xmin=days[0], xmax=days[6], ymin=0, ymax=10)
 			
-				plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
+				
+			
+				Thread(target = self.graph_plotting).start()
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				## complete test code
+			
+				# self.ids.chart_for_week.clear_widgets()
+				# total_cases = [6509,7289,7478,7857,8290,9020,6999]
+				# days = []
+				
+				# day = "{}".format(date.today()).split('-')
+				
+				# minus_day = 7
+				
+				# for minus in range(0,7):
+					# days.append(int(day[2]) - minus)
+				# days = sorted(days)
+				# print(days)
 				
 				
-				pointers = []
+				# graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+				  # y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
+				  # xmin=days[0], xmax=days[6], ymin=0, ymax=10)
+			
+				# plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
 				
-				for i in range(len(days)):
-					print(total_cases[i] / 1000)
-					pointers.append((days[i], total_cases[i] / 1000))
-				plot.points = pointers
+				
+				# pointers = []
+				
+				# for i in range(len(days)):
+					# print(total_cases[i] / 1000)
+					# pointers.append((days[i], total_cases[i] / 1000))
+				# plot.points = pointers
 				
 				
-				graph.add_plot(plot)
-				self.ids.chart_for_week.add_widget(graph)
+				# graph.add_plot(plot)
+				# self.ids.chart_for_week.add_widget(graph)
+				
+				######################################
 					
 					
 			elif (get_button == 4):

@@ -135,7 +135,7 @@
 				size_hint_y: 1.2
 				FloatLayout:
 					ScrollView:
-						pos_hint: {'top':.02}
+						pos_hint: {'top':.01}
 						size_hint_y: None
 						top: (root.height - total_detail_card.height) - 130
 						BoxLayout:
@@ -152,7 +152,7 @@
 							MDCard:
 								elevation: 10
 								orientation: 'vertical'
-								size_hint: 1,1
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -181,7 +181,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -204,7 +204,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -229,7 +229,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 0,0,0,1
@@ -273,7 +273,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -296,7 +296,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -322,7 +322,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -348,7 +348,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1.7
 								
 								
 								md_bg_color: 0,0,0,1
@@ -740,6 +740,9 @@
 						size_hint_y: .2
 		Screen:
 			name: 'chart_screen'
+			MDSpinner:
+				id: loading_chart
+				active: True
 			FloatLayout:
 				MDLabel:
 					pos_hint: {'center_y':.7}
@@ -749,12 +752,13 @@
 					
 					MDCard:
 						
-						top: chart_screen_title.center_y - 50
+						top: chart_screen_title.center_y - 30
 						size_hint: None, None
 						height: (root.height / 2)
 						width: root.width
 						id: chart_for_week
 						md_bg_color: 0,0,0,1
+
 					
 
 
