@@ -11,7 +11,6 @@ from threading import Thread
 from time import sleep
 
 
-
 api = requests.get('https://coronacache.home-assistant.io/corona.json').json()['features']
 states = requests.get('https://api.azanpro.com/zone/states.json').json()['states']
 
