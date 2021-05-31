@@ -738,6 +738,7 @@
 						
 					Widget:
 						size_hint_y: .2
+
 		Screen:
 			name: 'chart_screen'
 			MDSpinner:
@@ -745,7 +746,7 @@
 				active: True
 			FloatLayout:
 				MDLabel:
-					pos_hint: {'center_y':.7}
+					pos_hint: {'center_y':.75}
 					text: "Chart for 7 days"
 					halign: "center"
 					id: chart_screen_title
@@ -758,6 +759,12 @@
 						width: root.width
 						id: chart_for_week
 						md_bg_color: 0,0,0,1
+					
+					
+			MDLabel:
+				pos_hint: {'top':.65}
+				halign: 'center'
+				text: "click on database icon to update chart"
 
 					
 

@@ -71,42 +71,7 @@ global_covid_data = ['global_total', 'global_active', 'global_recovered', 'globa
 
 new_cases_in_state = []
 class MainFunction(Screen):
-	def graph_plotting(self):
-		sleep(5)
-		self.ids.chart_for_week.clear_widgets()
-		total_cases = [6509,7289,7478,7857,8290,9020,6999]
-		days = []
-		
-		day = "{}".format(date.today()).split('-')
-		
-		minus_day = 7
-		
-		for minus in range(0,7):
-			days.append(int(day[2]) - minus)
-		days = sorted(days)
-		print(days)
-		
-		
-		graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(day[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
-		  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
-		  xmin=days[0], xmax=days[6], ymin=0, ymax=10)
-	
-		plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
-		
-		
-		pointers = []
-		
-		for i in range(len(days)):
-			print(total_cases[i] / 1000)
-			pointers.append((days[i], total_cases[i] / 1000))
-		plot.points = pointers
-		
-		
-		graph.add_plot(plot)
-		self.ids.chart_for_week.add_widget(graph)
-		
-		
-		self.ids.loading_chart.active = False
+
 		
 	def retrive_cases_in_state(self):
 		for i in new_cases_in_state:
@@ -189,6 +154,7 @@ class MainFunction(Screen):
 			self.ids.global_button.font_size = '20sp'
 	def highlight_button(self, get_button):
 		global new_state_cases
+		global loading
 		for i in range(6):
 			self.ids[str(footer_buttons_outline[i])].icon = footer_buttons_outline[i]
 		self.ids[str(footer_buttons_outline[get_button])].icon = footer_buttons[get_button]
@@ -222,12 +188,68 @@ class MainFunction(Screen):
 					self.ids.no_database.text = "Please update database first by clicking on database icon"
 
 			elif (get_button == 3):
-			
+
 				
+				# self.ids.chart_for_week.clear_widgets()
+		
+				date_filter = []
+
+				with open('week_data.csv', 'r') as raw_data:
+					one_week = csv.DictReader(raw_data)
+					
+					for get_date in one_week:
+						if (get_date['date'] not in date_filter):
+							date = get_date['date'].split('-')
+							# print(date[2])
+							date_filter.append((date[2], get_date['new_cases']))
+					raw_data.close()
+		
+
+				# print(date_filter)
+				# print(date_filter)
+				for seven_days in range(-6, 0):
+					print(date_filter[seven_days])
+					
+				print(date_filter[-6][0])
+				
+				
+				# print("wake up")
+				
+				# total_cases = [6509,7289,7478,7857,8290,9020,6999]
+				# days = []
+				
+				# day = "{}".format(date.today()).split('-')
+				
+				# minus_day = 7
+				
+				# for minus in range(0,7):
+					# days.append(int(day[2]) - minus)
+				# days = sorted(days)
+				# print(days)
+				
+				
+				graph = Graph(ylabel = "X1000", xlabel = "Month: {}".format(date[1]), x_ticks_major = 1, y_ticks_minor = 1, y_ticks_major = 1, 
+				  y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, 
+				  xmin=date_filter[-6][0], xmax=date_filter[-1][0], ymin=0, ymax=10)
 			
-				Thread(target = self.graph_plotting).start()
-			
-			
+				plot = LinePlot(line_width = 3, color=[1, 0, 0, 1])
+				
+				
+				pointers = []
+				
+				for seven_days in range(-6, 0):
+					pointers.append((int(date_filter[seven_days][0]), int(date_filter[seven_days][1]) / 1000))
+				print(pointers)
+				# for i in range(len(days)):
+					# print(total_cases[i] / 1000)
+					# pointers.append((days[i], total_cases[i] / 1000))
+				plot.points = pointers
+				
+				
+				
+				self.ids.loading_chart.active = False
+				graph.add_plot(plot)
+				self.ids.chart_for_week.add_widget(graph)
 			
 			
 			
@@ -281,14 +303,24 @@ class MainFunction(Screen):
 			
 
 	def test(self):
-		for i in new_state_cases:
-			print(i)
-			self.ids.cases_by_states.add_widget(
-					Button(
-							text = i
-						)
-				)
-		self.ids.screen_manager.current = 'state_screen'
+		sleep(5)
+		print("wake up")
+	def run_loading(self):
+		global loading
+		print("sleeping")
+		sleep(5)
+		print("waking up")
+		loading = False
+		# self.ids.screen_manager.current = 'chart_screen'
+		# return self.graph_plotting()
+	
+	
+	def graph_plotting(self):
+		pass
+		
+		
+		
+
 	def __init__(self):
 		super().__init__()
 		
