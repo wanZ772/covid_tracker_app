@@ -135,10 +135,11 @@
 				size_hint_y: 1.2
 				FloatLayout:
 					ScrollView:
-						pos_hint: {'top':.05}
+						pos_hint: {'top':.02}
 						size_hint_y: None
 						top: (root.height - total_detail_card.height) - 130
 						BoxLayout:
+							size_hint_y: 1
 							orientation: 'horizontal'
 							size_hint_x: 3.5
 							spacing: 30
@@ -151,7 +152,7 @@
 							MDCard:
 								elevation: 10
 								orientation: 'vertical'
-								size_hint: 1,.8
+								size_hint: 1,1
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -260,7 +261,7 @@
 #######################								
 				FloatLayout:
 					ScrollView:
-						pos_hint: {'top':.70}
+						pos_hint: {'top':.6}
 						top: root.height / 2.1
 						size_hint_y: None
 						BoxLayout:
