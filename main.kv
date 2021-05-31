@@ -134,7 +134,7 @@
 				cols: 1
 				FloatLayout:
 					ScrollView:
-						pos_hint: {'top':.15}
+						pos_hint: {'top':.05}
 						size_hint_y: None
 						top: (root.height - total_detail_card.height) - 130
 						BoxLayout:
@@ -150,7 +150,7 @@
 							MDCard:
 								elevation: 10
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -179,7 +179,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -202,7 +202,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -227,7 +227,7 @@
 
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 0,0,0,1
@@ -259,7 +259,7 @@
 #######################								
 				FloatLayout:
 					ScrollView:
-						pos_hint: {'top':.85}
+						pos_hint: {'top':.70}
 						top: root.height / 2.1
 						size_hint_y: None
 						BoxLayout:
@@ -271,7 +271,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -294,7 +294,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -320,7 +320,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 72/255,72/255,72/255,1
@@ -346,7 +346,7 @@
 						
 							MDCard:
 								orientation: 'vertical'
-								size_hint: 1,.5
+								size_hint: 1,.8
 								
 								
 								md_bg_color: 0,0,0,1
@@ -770,6 +770,7 @@
 		
 		
 		MDIconButton:
+			user_font_size: '40sp'
 			id: dashboard_button
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
@@ -781,6 +782,7 @@
 				root.highlight_button(0)
 		
 		MDIconButton:
+			user_font_size: '40sp'
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'card-text-outline'
@@ -791,6 +793,7 @@
 				root.highlight_button(1)
 		
 		MDIconButton:
+			user_font_size: '40sp'
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'menu'
@@ -802,6 +805,7 @@
 		
 		
 		MDIconButton:
+			user_font_size: '40sp'
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'chart-line'
@@ -813,6 +817,7 @@
 		
 		
 		MDIconButton:
+			user_font_size: '40sp'
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'database-refresh'
@@ -825,6 +830,7 @@
 
 
 		MDIconButton:
+			user_font_size: '40sp'
 			theme_text_color: 'Custom'
 			text_color: 1,1,1,1
 			icon: 'information-outline'
