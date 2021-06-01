@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
 from kivy.garden.graph import LinePlot, Graph
 from random import randrange
+from kivmob import KivMob
 from kivy.uix.button import Button
 from kivy.utils import platform 
 import requests, csv
@@ -168,8 +169,9 @@ class MainFunction(Screen):
 		for i in range(6):
 			self.ids[str(footer_buttons_outline[i])].icon = footer_buttons_outline[i]
 		self.ids[str(footer_buttons_outline[get_button])].icon = footer_buttons[get_button]
-		
+		self.interstitial_ads.show_interstitial()
 		if (get_button != 0):
+			
 			self.remove_widget(self.ids.statistic_mode)
 			date_filter = []
 			if (get_button == 2):
@@ -322,9 +324,17 @@ class MainApp(MDApp):
 				data.close()
 		except:
 			pass
-
+		self.root.interstitial_ads = KivMob('ca-app-pub-1345230755033772~2528922157')
+		self.root.interstitial_ads.new_interstitial('ca-app-pub-1345230755033772/3888383085')
+		self.root.interstitial_ads.request_interstitial()
 	def build(self):
+		self.banner_ads = KivMob('ca-app-pub-1345230755033772~2528922157')
+		self.banner_ads.new_banner('ca-app-pub-1345230755033772/8770896876', top_pos = True)
+		self.banner_ads.request_banner()
+		self.banner_ads.show_banner()
 		return MainFunction()
+	def on_resume(self):
+		self.root.interstitial_ads.request_interstitial()
 if ('__main__' == __name__):
 	MainApp().run()
 	
