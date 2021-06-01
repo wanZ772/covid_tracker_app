@@ -767,6 +767,24 @@
 						size_hint_y: .2
 
 		Screen:
+			name: 'fail_screen'
+			
+			
+			MDLabel:
+				halign: 'center'
+				font_size: '20sp'
+				text: "Please check your Internet connection and try again letter!"
+				pos_hint: {'center_y':.6}
+			
+			MDLabel:
+				halign: 'center'
+				font_size: '15sp'
+				text: "To reload, please click on database icon down there. Thanks"
+				pos_hint: {'center_y': .5}
+			
+			
+			
+		Screen:
 			name: 'chart_screen'
 			MDSpinner:
 				id: loading_chart
@@ -788,10 +806,7 @@
 						md_bg_color: 0,0,0,1
 					
 					
-			MDLabel:
-				pos_hint: {'top':.65}
-				halign: 'center'
-				text: "click on database icon to update chart"
+			
 
 					
 

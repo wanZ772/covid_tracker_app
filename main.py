@@ -11,9 +11,12 @@ from threading import Thread
 from time import sleep
 
 
-api = requests.get('https://coronacache.home-assistant.io/corona.json').json()['features']
-states = requests.get('https://api.azanpro.com/zone/states.json').json()['states']
-
+try:
+	api = requests.get('https://coronacache.home-assistant.io/corona.json').json()['features']
+	internet = True
+#states = requests.get('https://api.azanpro.com/zone/states.json').json()['states']
+except:
+	internet = False
 
 global_confimed,global_deaths,global_recover,global_active = 0,0,0,0
 for global_data in range(len(api)):
@@ -197,7 +200,7 @@ class MainFunction(Screen):
 			elif (get_button == 3):
 
 				
-				# self.ids.chart_for_week.clear_widgets()
+				self.ids.chart_for_week.clear_widgets()
 		
 				date_filter = []
 
@@ -245,8 +248,11 @@ class MainFunction(Screen):
 	def __init__(self):
 		super().__init__()
 		
+		if (internet):
+			self.ids.screen_manager.current = 'global_screen'
+		else:
+			self.ids.screen_manager.current = 'fail_screen'
 		
-		self.ids.screen_manager.current = 'global_screen'
 		(self.ids[str(footer_buttons_outline[0])].icon) = footer_buttons[0]
 		
 		
